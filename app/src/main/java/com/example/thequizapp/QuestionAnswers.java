@@ -6,7 +6,7 @@ public class QuestionAnswers {
             "Displacement is a ________________ quantity.",
             "If a body covers a full circle, then the displacement is: ",
             "When a car at high speed makes a sharp turn, the driver in a car tends to get thrown to the side opposite to the turn. This is due to the",
-
+            "Which of the following can be made into crystal?"
 
 
     };
@@ -16,13 +16,15 @@ public class QuestionAnswers {
             {"Scalar", "Vector", "Vertical", "Horizontal"},
             {"1", "0", "Distance", "Displacement"},
             {"inertia of motion", "inertia of time", "inertia of direction", "inertia of rest"},
+            {"A bacterium", "An amoeba", "a sperm", "a virus"},
     };
 
     public static String answers[] ={
             "Scalar",
             "Vector",
-            "Distance",
-            "inertia of direction"
+            "0",
+            "inertia of direction",
+            "a virus"
 
     };
 

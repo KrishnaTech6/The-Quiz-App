@@ -3,14 +3,15 @@ package com.example.thequizapp
 import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
-import android.graphics.Color.MAGENTA
-import android.graphics.Color.WHITE
+import android.graphics.Color.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.withStyledAttributes
 
 class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
@@ -50,8 +51,6 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
         ansd.setOnClickListener (this)
         submitbtn.setOnClickListener(this)
 
-        submitbtn.text = "Next"
-
     }
 
     override fun onClick(view: View) {
@@ -61,28 +60,39 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
         ansc.setBackgroundColor(WHITE)
         ansd.setBackgroundColor(WHITE)
 
-        var clickedButton:Button = view as Button
+        val clickedButton:Button = view as Button
 
         if (clickedButton == submitbtn){
-            if (selectedAns == QuestionAnswers.answers[currentQuestionIndex]){
-                score++
-            }
+            val actualAnswer = QuestionAnswers.answers[currentQuestionIndex]
+            if (selectedAns == actualAnswer){
+                score++ }
+            else{score }  //otherwise it was sometimes showing score to 1, if no option was clicked
 
+            Toast.makeText(this , "Answer: $actualAnswer \n score: $score/$totalQuestion ", Toast.LENGTH_SHORT).show()
             currentQuestionIndex++
 
             if (currentQuestionIndex >= totalQuestion-1){
                 submitbtn.text = "Submit"
             }
-
             loadNewQuestions()
+
 
         }
         else{
             selectedAns = clickedButton.text.toString()
             clickedButton.setBackgroundColor(MAGENTA)
 
+//            button shows green color if right else red
+//            if (selectedAns == QuestionAnswers.answers[currentQuestionIndex] ){
+//                clickedButton.setBackgroundColor(GREEN) }
+//            else{
+//                clickedButton.setBackgroundColor(RED)
+//            }
+
+
         }
     }
+
 
     private fun loadNewQuestions(){
 
@@ -99,21 +109,24 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    fun finishQuiz(){
+    private fun finishQuiz(){
         var passStatus  = "" ;
-        if (score >= totalQuestion*0.6){
-            passStatus = "Passed"
-        }
+        passStatus = if ((score >= totalQuestion*0.6 )&& (score < totalQuestion*0.75)){
+            "Good, You can Improve"
+        } else if ((score >= totalQuestion*0.75 )&& (score < totalQuestion*0.9))
+            "Very Good"
+        else if ((score >= totalQuestion*0.9 )&& (score <= totalQuestion))
+            "Excellent!!!"
         else{
-            passStatus = "Failed"
+            "You Can Improve"
         }
 
         AlertDialog.Builder(this)
             .setTitle(passStatus)
             .setMessage("Score is $score out of $totalQuestion")
-            .setPositiveButton("Restart", { dialogInterface, i -> restartQuiz() })
+            .setPositiveButton("Restart") { dialogInterface, i -> restartQuiz() }
             .setCancelable(false)
-            .show() ;
+            .show() 
     }
      private fun restartQuiz() {
         score=0
