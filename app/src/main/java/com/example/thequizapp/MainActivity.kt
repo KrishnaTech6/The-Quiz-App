@@ -15,9 +15,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnStart: Button = findViewById(R.id.btn_start)
+        val et_Name: EditText = findViewById(R.id.et_name)
         btnStart.setOnClickListener {
-            val intent = Intent(this, QuizWindow::class.java)
-            startActivity(intent)
+
+            if (et_Name.text.toString() == "" ){
+                AlertDialog.Builder(this)
+                    .setTitle("This Field Can't Be Empty")
+                    .setMessage("Please Enter your Name!!")
+                    .show();
+            }
+            else{
+                val intent = Intent(this, QuizWindow::class.java)
+                startActivity(intent)
+
+            }
+
 
 
         }
