@@ -63,9 +63,9 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
 
-        ansa.setBackgroundColor(WHITE)
-        ansb.setBackgroundColor(WHITE)
-        ansc.setBackgroundColor(WHITE)
+       ansa.setBackgroundColor(WHITE)
+       ansb.setBackgroundColor(WHITE)
+       ansc.setBackgroundColor(WHITE)
         ansd.setBackgroundColor(WHITE)
 
         val clickedButton:Button = view as Button
@@ -107,11 +107,12 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
                      ansb.setBackgroundColor(WHITE)
                      ansc.setBackgroundColor(WHITE)
                      ansd.setBackgroundColor(WHITE)
+
                     submitbtn.visibility = View.VISIBLE
 
 
                 },
-                2500 // value in milliseconds
+                2000 // value in milliseconds
             )
 
 
@@ -154,8 +155,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun finishQuiz(){
-        var passStatus  = "" ;
-        passStatus = if ((score >= totalQuestion*0.6 )&& (score < totalQuestion*0.75)){
+        var passStatus = if ((score >= totalQuestion*0.6 )&& (score < totalQuestion*0.75)){
             "Good, You can Improve"
         } else if ((score >= totalQuestion*0.75 )&& (score < totalQuestion*0.9))
             "Very Good"
@@ -168,7 +168,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
         AlertDialog.Builder(this)
             .setTitle(passStatus)
             .setMessage("Score is $score out of $totalQuestion")
-            .setPositiveButton("Restart") { dialogInterface, i -> restartQuiz() }
+            .setPositiveButton("Restart") { _, _ -> restartQuiz() }
             .setCancelable(false)
             .show() 
     }
@@ -179,5 +179,8 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
         loadNewQuestions()
     }
 
+//So that user can't go back during quiz
+    override fun onBackPressed() {
+    }
 }
 

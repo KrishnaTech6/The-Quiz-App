@@ -4,108 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_bg"
+    android:background="@drawable/background"
     tools:context=".QuizWindow">
 
-
-    <TextView
-        android:id="@+id/totalQuestionstv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:text="@string/total_questions"
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/submit"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/text_style" />
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:paddingStart="@dimen/margin_start"
-        android:paddingEnd="@dimen/margin_start"
-        android:id="@+id/question"
-        style="@style/text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Here the question will Appear"
-        app:layout_constraintBottom_toTopOf="@+id/ans_a"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalQuestionstv" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/ans_a"
-        style="@style/text_style"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="168dp"
-        android:backgroundTint="#ffffff"
-        android:text="Ans A"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/totalQuestionstv" />
+            <TextView
+                android:id="@+id/totalQuestionstv"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/total_questions"
+                android:textStyle="bold" />
 
-    <Button
-        android:backgroundTint="#ffffff"
-        style="@style/text_style"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_start"
-        android:id="@+id/ans_b"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Ans B"
-        android:layout_marginTop="@dimen/margin_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/ans_a" />
+            <TextView
+                android:id="@+id/question"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingStart="@dimen/margin_start"
+                android:paddingEnd="@dimen/margin_start"
+                android:text="Here the question will Appear" />
 
-    <Button
-        android:backgroundTint="#ffffff"
-        style="@style/text_style"
-        android:layout_marginTop="@dimen/margin_start"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_start"
-        android:id="@+id/ans_c"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Ans C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/ans_b" />
+            <Button
+                android:id="@+id/ans_a"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="@dimen/margin_start"
+                android:backgroundTint="#ffffff"
+                android:text="Ans A"
+                android:textAllCaps="false" />
 
-    <Button
-        android:backgroundTint="#ffffff"
-        style="@style/text_style"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_start"
-        android:id="@+id/ans_d"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Ans D"
-        android:textAllCaps="false"
-        android:layout_marginTop="@dimen/margin_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ans_c" />
+            <Button
+                android:id="@+id/ans_b"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start"
+                android:layout_marginTop="@dimen/margin_start"
+                android:layout_marginEnd="@dimen/margin_start"
+                android:backgroundTint="#ffffff"
+                android:text="Ans B"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/ans_c"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start"
+                android:layout_marginTop="@dimen/margin_start"
+                android:layout_marginEnd="@dimen/margin_start"
+                android:backgroundTint="#ffffff"
+                android:text="Ans C"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/ans_d"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start"
+                android:layout_marginTop="@dimen/margin_start"
+                android:layout_marginEnd="@dimen/margin_start"
+                android:backgroundTint="#ffffff"
+                android:text="Ans D"
+                android:textAllCaps="false" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 
     <Button
         android:id="@+id/submit"
         style="@style/text_style"
-        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="@dimen/margin_start"
         android:text="Submit"
         android:textAllCaps="false"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ans_d" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
