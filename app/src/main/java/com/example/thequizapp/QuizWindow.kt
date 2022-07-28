@@ -1,5 +1,6 @@
 package com.example.thequizapp
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
@@ -33,6 +34,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
     lateinit var submitbtn: Button
     lateinit var hello: Button
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_window)
@@ -49,8 +51,6 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
         questionstv = findViewById(R.id.question)
 
-        totalquestionstv.text= "Total Questions: $totalQuestion"
-
         loadNewQuestions()
 
         ansa.setOnClickListener (this)
@@ -61,6 +61,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onClick(view: View) {
 
        ansa.setBackgroundColor(WHITE)
@@ -139,12 +140,14 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun loadNewQuestions(){
 
         if (currentQuestionIndex == totalQuestion){
             finishQuiz()
             return
         }
+        totalquestionstv.text = "${currentQuestionIndex+1} out of $totalQuestion"
 
         questionstv.text = QuestionAnswers.questions[currentQuestionIndex]
         ansa.text = QuestionAnswers.options[currentQuestionIndex][0]
@@ -155,7 +158,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun finishQuiz(){
-        var passStatus = if ((score >= totalQuestion*0.6 )&& (score < totalQuestion*0.75)){
+        val passStatus = if ((score >= totalQuestion*0.6 )&& (score < totalQuestion*0.75)){
             "Good, You can Improve"
         } else if ((score >= totalQuestion*0.75 )&& (score < totalQuestion*0.9))
             "Very Good"
@@ -172,6 +175,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
             .setCancelable(false)
             .show() 
     }
+     @SuppressLint("SetTextI18n")
      private fun restartQuiz() {
         score=0
         currentQuestionIndex=0
