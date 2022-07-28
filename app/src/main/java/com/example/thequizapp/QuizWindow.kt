@@ -6,12 +6,17 @@ import android.graphics.Color
 import android.graphics.Color.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import java.sql.Time
 
 class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
@@ -26,6 +31,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
     lateinit var ansc: Button
     lateinit var ansd: Button
     lateinit var submitbtn: Button
+    lateinit var hello: Button
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -39,6 +45,8 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
         ansd = findViewById(R.id.ans_d)
 
         submitbtn = findViewById(R.id.submit)
+        submitbtn.text = "Next"
+
         questionstv = findViewById(R.id.question)
 
         totalquestionstv.text= "Total Questions: $totalQuestion"
@@ -68,19 +76,55 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
                 score++ }
             else{score }  //otherwise it was sometimes showing score to 1, if no option was clicked
 
-            Toast.makeText(this , "Answer: $actualAnswer \n score: $score/$totalQuestion ", Toast.LENGTH_SHORT).show()
-            currentQuestionIndex++
-
-            if (currentQuestionIndex >= totalQuestion-1){
-                submitbtn.text = "Submit"
+            if (selectedAns == actualAnswer ){
+                hello.setBackgroundColor(GREEN)
+                }
+            else{
+                hello.setBackgroundColor(RED)
             }
-            loadNewQuestions()
+
+            when(actualAnswer){
+                ansa.text.toString() -> ansa.setBackgroundColor(GREEN)
+                ansb.text.toString() -> ansb.setBackgroundColor(GREEN)
+                ansc.text.toString() -> ansc.setBackgroundColor(GREEN)
+                ansd.text.toString() -> ansd.setBackgroundColor(GREEN)
+            }
+            //Toast.makeText(this , "Answer: $actualAnswer \n score: $score/$totalQuestion ", Toast.LENGTH_SHORT).show()
+
+            submitbtn.visibility = View.INVISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed(
+                {
+
+                    currentQuestionIndex++
+
+                    if (currentQuestionIndex >= totalQuestion-1){
+                        submitbtn.text = "Submit"
+                    }
+
+                    loadNewQuestions()
+                     ansa.setBackgroundColor(WHITE)
+                     ansb.setBackgroundColor(WHITE)
+                     ansc.setBackgroundColor(WHITE)
+                     ansd.setBackgroundColor(WHITE)
+                    submitbtn.visibility = View.VISIBLE
+
+
+                },
+                2500 // value in milliseconds
+            )
+
+
+
+
 
 
         }
         else{
             selectedAns = clickedButton.text.toString()
             clickedButton.setBackgroundColor(MAGENTA)
+            hello = clickedButton
+
 
 //            button shows green color if right else red
 //            if (selectedAns == QuestionAnswers.answers[currentQuestionIndex] ){
