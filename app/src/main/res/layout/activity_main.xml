@@ -23,9 +23,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="24dp"
+        android:paddingStart="@dimen/margin_start"
+        android:paddingEnd="@dimen/margin_start"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
