@@ -25,6 +25,8 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
 
     var score:Int=0
     var i: Int = 0
+    var p: Int = 0  // created so as to prevent crash if initially submit btn is clicked, with no option is chosen
+                    // as hello variable will not be initialised
     var totalQuestion= QuestionAnswers.questions.size
     var currentQuestionIndex:Int =0
     var selectedAns: String =""
@@ -36,6 +38,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
     lateinit var ansd: Button
     lateinit var submitbtn: Button
     lateinit var hello: Button
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?){
@@ -80,7 +83,8 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
                 score++ }
             else{score }  //otherwise it was sometimes showing score to 1, if no option was clicked
 
-            when (selectedAns) {
+            if (p==1){
+                when (selectedAns) {
                 actualAnswer -> {
                     hello.setBackgroundColor(GREEN) }
                 "" -> {
@@ -97,6 +101,11 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
                         ansd.text.toString() -> ansd.setBackgroundColor(GREEN)
                     }
                 }
+            } }
+
+            else{
+                if (i==0) {Toast.makeText(this, "No Option Chosen", Toast.LENGTH_SHORT).show()
+                    i=2}
             }
 
 
@@ -134,6 +143,7 @@ class QuizWindow : AppCompatActivity(), View.OnClickListener {
             selectedAns = clickedButton.text.toString()
             clickedButton.setBackgroundColor(MAGENTA)
             hello = clickedButton
+            p=1
         }
     }
 
